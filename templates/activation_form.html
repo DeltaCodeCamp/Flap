@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Activation Form</title>
+  </head>
+  <body>
+    <form method = 'post'>
+      {% csrf_token %}
+      {{form}}
+      <input type = "submit" />
+    </form>
+  </body>
+</html>
