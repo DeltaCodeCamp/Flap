@@ -17,7 +17,6 @@ class eventsForm(forms.ModelForm):
 
 class organizationForm(forms.ModelForm):
     password = forms.CharField(widget = forms.PasswordInput)
-    info = forms.CharField(widget = forms.Textarea)
     class Meta:
         model = organization
         exclude = ['activated']

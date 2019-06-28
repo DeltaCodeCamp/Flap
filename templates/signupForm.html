@@ -10,7 +10,7 @@
                 {{form.username}}<br>
                 <label>PASSWORD</label><br>
                 {{form.password}}<br>
-                <label class ="label2">PHONE</label><br>
+                <label >PHONE</label><br>
                 {{form.phone}}
 
 
@@ -19,13 +19,13 @@
                 {{form.organization}}<br>
                 <label>PASSWORD</label><br>
                 {{form.password}}<br>
-                <label class ="label2">PHONE</label><br>
+                <label >PHONE</label><br>
                 {{form.phone}}
 
 
 
             {% elif designation == "event" %}
-                <label>EVENT</label><br>
+                <label class="label1">EVENT</label><br>
                 {{form.event}}<br>
                 <label>LOCATION</label><br>
                 {{form.location}}<br>
@@ -33,8 +33,33 @@
                 {{form.after_days}}<br>
                 <label>INFO</label><br>
                 {{form.info}}
+            
+            {% elif designation == "orgsec" %}
+                <label class="label1">MINIMUM AGE</label><br>
+                {{form.minimum_age}}<br>
+                <label class ="label1">MAXIMUM AGE</label><br>
+                {{form.maximum_age}}<br>
+                <label>DISABILITY</label><br>
+                {{form.disability}}<br>
+                <label>ACTIVITIES</label><br>
+                {{form.activities}}<br>
+                <label>INFO</label><br>
+                {{form.info}}
 
+
+            {% elif designation == "spesec" %}
+                <label class="label1">AGE</label><br>
+                {{form.age}}<br>
+                <label >BIO</label><br>
+                {{form.bio}}<br>
+                <label>DISABILITY</label><br>
+                {{form.disability}}<br>
+                <label>ACTIVITIES</label><br>
+                {{form.activities}}
                 
+
+
+
             {% endif %}
             <br>
             <br>
