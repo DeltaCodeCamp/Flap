@@ -1,0 +1,40 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+
+.form-log{
+    text-align: center;
+    border: 1px transparent black;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 10%;
+    background-color: rgb(221, 221, 221);
+    
+}
+
+.form-log input[type = "text"]{
+    margin-top: 1%;
+    padding-top: 5px;
+    margin-bottom: 3%;
+    width: 50%;
+    height: 40px;
+}
+
+.form-log input[type = "password"]{
+    margin-top: 1%;
+    padding-top: 5px;
+    margin-bottom: 5%;
+    width: 50%; 
+    height: 40px;
+}
+
+.form-log input[type = "submit"]{
+    margin-bottom: 10%;
+}
+
+.label1{
+    margin-top: 10%;
+}
