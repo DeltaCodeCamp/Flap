@@ -7,6 +7,7 @@ from django.template import RequestContext
 from django.template.context_processors import csrf
 
 from .forms import signinForm, specialForm, eventsForm, organizationForm, special_secondForm, organization_secondForm
+
 def signin(request):
     if request.method == "POST":
         form = signinForm(request.POST)
