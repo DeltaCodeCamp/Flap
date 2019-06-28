@@ -206,8 +206,15 @@ def calculate_score(obj):
     total_score = 0
     score_arr_spcl = []
     score_arr_org = []
-    original_arr_org = organization_second.objects.all()
-    original_arr_spcl = special_second.objects.all()
+    original_arr_org = []
+    original_arr_spcl = []
+    original_arr_or = organization_second.objects.all()
+    for a in original_arr_or:
+        original_arr_org.append(a)
+    original_arr_spc = special_second.objects.all()
+    for b in original_arr_spc:
+        original_arr_spcl.append(b)
+
     for one_obj in original_arr_org:
         sub = one_obj.minimum_age - obj.age
         sub1 =0
@@ -265,10 +272,10 @@ def calculate_score(obj):
         else:
             score_arr_spcl.append(0)
 
-    for i in range(len(original_arr_org) - 1):
+    for i in range(len(original_arr_spcl)):
         print ('rotatig again')
-        for j in range(len(original_arr_org) - 2):
-            if score_arr_spcl[j] > score_arr_spcl[j]:
+        for j in range(len(original_arr_spcl) - 1):
+            if score_arr_spcl[j] < score_arr_spcl[j+1]:
                 print(i)
                 print(j)
                 score_moderate = score_arr_spcl[j]
@@ -282,7 +289,7 @@ def calculate_score(obj):
 
         for i in range(len(original_arr_org)):
             for j in range(len(original_arr_org) - 1):
-                if score_arr_org[j] > score_arr_org[j]:
+                if score_arr_org[j] < score_arr_org[j+1]:
                     score_moderate = score_arr_org[j]
                     actual_moderate = original_arr_org[j]
 
@@ -292,6 +299,9 @@ def calculate_score(obj):
                     score_arr_org[j+1] = score_moderate
                     original_arr_org[j+1] = actual_moderate
     print(score_arr_org)
+    print(original_arr_org)
+
+    print(score_arr_spcl)
     print(original_arr_org)
 
 
