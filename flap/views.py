@@ -14,8 +14,8 @@ import string
 import random
 
 
-# import spacy
-# nlp = spacy.load('en')
+import spacy
+nlp = spacy.load('en')
 
 
 def home(request):
@@ -26,7 +26,7 @@ def home(request):
     else:
         obj = special_second.objects.get(pk = 1)
         all_arr = calculate_score(obj)
-        dict = {'organizations': all_arr[1][:3], 'special': all_arr[3][:3]}
+        dict = {'organizations': all_arr[1][:4], 'special': all_arr[3][:4]}
         dict.update(csrf(request))
         return render_to_response('home.html', dict, RequestContext(request))
 from .forms import signinForm, specialForm, eventsForm, organizationForm, special_secondForm, organization_secondForm
@@ -218,12 +218,18 @@ def calculate_score(obj):
     original_arr_org = []
     original_arr_spcl = []
     original_arr_or = organization_second.objects.all()
+    print(len(original_arr_or))
     for a in original_arr_or:
+        print(a.organization.organization)
         original_arr_org.append(a)
     original_arr_spc = special_second.objects.all()
+    print(len(original_arr_spc))
     for b in original_arr_spc:
+        print(b.special.username)
         original_arr_spcl.append(b)
-
+        sub1 =0
+        activity_score = 0
+        disability_score = 0
     for one_obj in original_arr_org:
         sub = one_obj.minimum_age - obj.age
         sub1 =0
@@ -253,7 +259,6 @@ def calculate_score(obj):
         score_arr_org.append(total_score)
 
     for one_obj in original_arr_spcl:
-        print('rotating off')
         if obj.special != one_obj.special:
             if one_obj.age == obj.age:
                 age_score = 15
@@ -282,7 +287,6 @@ def calculate_score(obj):
             score_arr_spcl.append(0)
 
     for i in range(len(original_arr_spcl)):
-        print ('rotatig again')
         for j in range(len(original_arr_spcl) - 1):
             if score_arr_spcl[j] < score_arr_spcl[j+1]:
                 print(i)
@@ -296,6 +300,8 @@ def calculate_score(obj):
                 score_arr_spcl[j+1] = score_moderate
                 original_arr_spcl[j+1] = actual_moderate
 
+
+
         for i in range(len(original_arr_org)):
             for j in range(len(original_arr_org) - 1):
                 if score_arr_org[j] < score_arr_org[j+1]:
@@ -307,6 +313,8 @@ def calculate_score(obj):
 
                     score_arr_org[j+1] = score_moderate
                     original_arr_org[j+1] = actual_moderate
+    print(score_arr_org)
+    print(score_arr_spcl)
     all_arr = []
     all_arr.append(score_arr_org)
     all_arr.append(original_arr_org)
