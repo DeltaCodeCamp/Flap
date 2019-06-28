@@ -1,11 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div class="form-group text-center signup">
+<<<<<<< HEAD
+    <div class="form-log">
+=======
+    <div class="text-center form-log">
+>>>>>>> 1abd519638663d617e6b8374d38fedefef885b6c
 
         <form  method = "post">
             {% csrf_token %}
-            {{form.as_p}}
+            {% if form.organization == "" %}
+                {{form.username}}<br>
+                {{form.password}}<br>
+                {{form.phone}}
+            {% else %}
+                {{form.organizations}}<br>
+                {{form.password}}<br>
+                {{form.phone}} 
+            {% endif %}   
             <input class ="btn btn-default bg-primary" type = "submit"  name = "Sign Up" />
         </form>
     </div>

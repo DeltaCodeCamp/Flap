@@ -4,15 +4,20 @@
 	box-sizing: border-box;
 }
 
+/* html{
+    background:linear-gradient(rgba(0, 133, 126,0.8),rgb(0, 145, 241));
+} */
 
 .form-log{
+    color: white;
     text-align: center;
-    border: 1px transparent black;
+    border: 1px solid blue;
     margin-left: 30%;
     margin-right: 30%;
-    margin-top: 10%;
-    background-color: rgb(221, 221, 221);
-    
+    margin-top: 5%;
+    background: linear-gradient(rgba(0, 0, 0, 0.836),rgb(102, 7, 73));
+    border-radius: 20px;
+    box-shadow: 0px 2px 2px rgba(52, 0, 100, 0.918)
 }
 
 .form-log input[type = "text"]{
@@ -21,6 +26,8 @@
     margin-bottom: 3%;
     width: 50%;
     height: 40px;
+    border-radius:5px;
+    border: 1px transparent;
 }
 
 .form-log input[type = "password"]{
@@ -29,12 +36,24 @@
     margin-bottom: 5%;
     width: 50%; 
     height: 40px;
+    border-radius:5px;
+    border: 1px transparent;
 }
 
 .form-log input[type = "submit"]{
-    margin-bottom: 10%;
+    margin-bottom: 20%;
 }
+
+/* .form-log a{
+    color: rgb(185, 0, 0);
+    font-size: 15px;
+    padding-bottom: 5px;
+} */
 
 .label1{
     margin-top: 10%;
+}
+
+.custom-nav-styling{
+    background: linear-gradient(to right,black,purple);
 }

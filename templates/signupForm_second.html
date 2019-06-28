@@ -5,11 +5,15 @@
     <title>Sign Up Questionnaire</title>
   </head>
   <body>
-    <form method = "post">
-      {% csrf_token %}
-      {{form}}
-      <input type = "hidden" value = "{{user}}" name = "user" />
-      <input type = "submit" value = "Submit" />
-    </form>
+
+    <div class="text-center form-log">
+      <form method = "post">
+          {% csrf_token %}
+          {{form}}
+          <input type = "hidden" value = "{{user}}" name = "user" />
+          <input class = "btn btn-default bg-primary" type = "submit" value = "Submit" />
+      </form>
+    </div>
+    
   </body>
 </html>
