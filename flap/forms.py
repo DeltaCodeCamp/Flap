@@ -1,6 +1,8 @@
 from django import forms
 from .models import special, events, organization, special_second, organization_second
 
+
+
 class specialForm(forms.ModelForm):
     password = forms.CharField(widget = forms.PasswordInput)
     class Meta:
