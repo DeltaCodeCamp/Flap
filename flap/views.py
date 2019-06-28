@@ -24,7 +24,11 @@ def home(request):
         calculate_score(obj)
         return HttpResponse("All done")
     else:
-        return HttpResponse("The home is loaded.")
+        obj = special_second.objects.get(pk = 1)
+        all_arr = calculate_score(obj)
+        dict = {'organizations': all_arr[1][:3], 'special': all_arr[3][:3]}
+        dict.update(csrf(request))
+        return render_to_response('home.html', dict, RequestContext(request))
 from .forms import signinForm, specialForm, eventsForm, organizationForm, special_secondForm, organization_secondForm
 
 
@@ -67,8 +71,7 @@ def special_(request):
             print(request.session['usr_identity'])
         return redirect("/activation/special")
     else:
-        obj = special_second.objects.get(pk = 1)
-        calculate_score(obj)
+
         form = specialForm()
         dict = {'form': form, 'designation': 'special'}
         dict.update(csrf(request))
@@ -93,6 +96,7 @@ def events_(request):
 
 def organization_(request):
     if request.method == "POST":
+        print('reached here')
         form = organizationForm(request.POST)
         if form.is_valid():
             request.session['org_identity'] = request.POST['organization']
@@ -115,7 +119,10 @@ def organization_(request):
             org = organization.objects.get(organization = request.POST['organization'])
             a = activation_tbl(organization = org , session_key = session_key, mobile_key = key)
             a.save()
-        return redirect("/activation/organization")
+            return redirect("/activation/organization")
+        else:
+            print(form.errors)
+            return HttpResponse("sonethiasdf,knsdkfj")
     else:
         form = organizationForm()
         dict = {'form': form, 'designation': 'organization'}
@@ -298,11 +305,12 @@ def calculate_score(obj):
 
                     score_arr_org[j+1] = score_moderate
                     original_arr_org[j+1] = actual_moderate
-    print(score_arr_org)
-    print(original_arr_org)
-
-    print(score_arr_spcl)
-    print(original_arr_org)
+    all_arr = []
+    all_arr.append(score_arr_org)
+    all_arr.append(original_arr_org)
+    all_arr.append(score_arr_spcl)
+    all_arr.append(original_arr_spcl)
+    return all_arr
 
 
 def send_sms(message):
@@ -316,5 +324,4 @@ def send_sms(message):
                          from_='+12055649922',
                          to='+9779819604815'
                      )
-
     print(message.sid)
