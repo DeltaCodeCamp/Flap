@@ -79,9 +79,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'flap',
         'USER': 'postgres',
-        'PASSWORD': 'rugby',
+        'PASSWORD': 'A@sp1r1ne',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '5555',
     }
 }
 
@@ -125,10 +125,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-<<<<<<< HEAD
-    os.path.join(BASE_DIR, "static"),
-]
-=======
     os.path.join(BASE_DIR, "static")
 ]
->>>>>>> b40c84203f28a4623adec485c16f81cf634681fe

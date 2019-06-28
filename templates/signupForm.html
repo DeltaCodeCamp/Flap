@@ -5,16 +5,37 @@
 
         <form  method = "post">
             {% csrf_token %}
-            {% if form.organization == "" %}
+            {% if designation == "special" %}
+                <label  class="label1">USERNAME</label><br>
                 {{form.username}}<br>
+                <label>PASSWORD</label><br>
                 {{form.password}}<br>
+                <label class ="label2">PHONE</label><br>
                 {{form.phone}}
-            {% else %}
-                {{form.organizations}}<br>
+
+
+            {% elif designation == "organization" %}
+                <label class="label1">ORGANIZATION</label><br>
+                {{form.organization}}<br>
+                <label>PASSWORD</label><br>
                 {{form.password}}<br>
+                <label class ="label2">PHONE</label><br>
                 {{form.phone}} 
-            {% endif %}   
-            <input class ="btn btn-default bg-primary" type = "submit"  name = "Sign Up" />
+
+
+            {% elif designation == "event" %}
+                <label>EVENT</label><br>
+                {{form.event}}<br>
+                <label>LOCATION</label><br>
+                {{form.location}}<br>
+                <label>AFTER DAYS</label><br>
+                {{form.after_days}}<br>
+                <label>INFO</label><br>
+                {{form.info}}
+            {% endif %}
+            <br>
+            <br>   
+            <input class ="btn btn-outline-success" type = "submit"  name = "Sign Up" />
         </form>
     </div>
 {% endblock %}

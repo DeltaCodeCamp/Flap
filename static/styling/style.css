@@ -40,6 +40,16 @@
     border: 1px transparent;
 }
 
+.form-log input[type = "number"]{
+    margin-top: 1%;
+    padding-top: 5px;
+    margin-bottom: 5%;
+    width: 50%; 
+    height: 40px;
+    border-radius:5px;
+    border: 1px transparent;
+}
+
 .form-log input[type = "submit"]{
     margin-bottom: 20%;
 }
@@ -52,6 +62,10 @@
 
 .label1{
     margin-top: 10%;
+}
+
+.label2{
+    
 }
 
 .custom-nav-styling{

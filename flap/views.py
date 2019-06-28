@@ -13,13 +13,6 @@ from twilio.rest import Client
 import string
 import random
 
-<<<<<<< HEAD
-import spacy
-nlp = spacy.load('en')
-
-
-=======
->>>>>>> b40c84203f28a4623adec485c16f81cf634681fe
 def home(request):
     if request.method == "POST":
         pass
