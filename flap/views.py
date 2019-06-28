@@ -150,7 +150,7 @@ def organization_secon(request):
         form = organization_secondForm()
         dict = {'form': form, 'user': user, 'designation':'orgsec'}
         dict.update(csrf(request))
-        return render_to_response('signupForm.html', dict, RequestContext(request))
+        return render_to_response('signupForm_second.html', dict, RequestContext(request))
 
 def special_secon(request):
     if request.method == "POST":
@@ -173,7 +173,7 @@ def special_secon(request):
         user = request.session['usr_identity']
         dict = {'form': form,'user': user,'designation':'spesec'}
         dict.update(csrf(request))
-        return render_to_response('signupForm.html', dict, RequestContext(request))
+        return render_to_response('signupForm_second.html', dict, RequestContext(request))
 
 def activation(request, redirection_code):
     if request.method == "POST":

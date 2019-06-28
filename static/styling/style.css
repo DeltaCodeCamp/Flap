@@ -61,13 +61,25 @@
     padding-bottom: 5px;
 } */
 
-.label1{
-    margin-top: 10%;
+
+.infoorg input[type ="text"]{
+    width: 70%;
+    height: 125px;
 }
 
-.label3{
-    margin-top: 10%;
+
+
+.age1 input[type = "number"]{
+    width: 10%;
+    text-align: center;
 }
+
+.age2 input[type = "number"]{
+    width: 10%;
+    text-align: center;
+}
+
+
 
 
 
@@ -77,4 +89,9 @@
     top: 0;
     width: 100%;
     
+}
+
+
+.label1{
+    margin-top: 10%;
 }
