@@ -1,5 +1,14 @@
 .login {
-  padding: 10px 10px;
-  margin: 50px 50px; }
+  background-color: rgba(156, 147, 147, 0.5);
+  padding: 10px;
+  padding-top: 30px;
+  position: absolute;
+  top: 30vh;
+  bottom: 30vh;
+  left: 40vw;
+  right: 40vw;
+  width: 300px;
+  height: 200px;
+  border-radius: 10px; }
 
 /*# sourceMappingURL=style.css.map */
