@@ -1,19 +1,62 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Sign Up Questionnaire</title>
-  </head>
-  <body>
+{% extends "base.html" %}
+{% block content %}
 
-    <div class="text-center form-log">
+<div class="text-center form-log">
       <form method = "post">
           {% csrf_token %}
-          {{form}}
+
+
+
+          {% if designation == "event" %}
+          <label class="label1">EVENT</label><br>
+          {{form.event}}<br>
+          <label>LOCATION</label><br>
+          {{form.location}}<br>
+          <label>AFTER DAYS</label><br>
+          {{form.after_days}}<br>
+          <label>INFO</label><br>
+          {{form.info}}<br><br>
+      
+      {% elif designation == "orgsec" %}
+      <div class="age1">
+              <label class="label1">MINIMUM AGE</label><br>
+              {{form.minimum_age}}<br>
+      </div>
+      <div class="age2">
+              <label >MAXIMUM AGE</label><br>
+          {{form.maximum_age}}<br>
+      </div>
+          
+          
+          <div class="infoorg">
+                  <label>INFO</label><br>
+                  {{form.info}}<br>
+          </div>
+          
+          <label>DISABILITY</label><br>
+          {{form.disability}}<br>
+          <label>ACTIVITIES</label><br>
+          {{form.activities}}<br><br>
+          
+
+
+      {% elif designation == "spesec" %}
+      <div class="age1">
+          <label class="label1">AGE</label><br>
+          {{form.age}}<br>
+      </div>
+          
+
+          <label>ACTIVITIES</label><br>
+          {{form.activities}}<br><br>
+          <label>DISABILITY</label><br>
+          {{form.disability}}<br><br>
+
+          {% endif %}
+
+
           <input type = "hidden" value = "{{user}}" name = "user" />
-          <input class = "btn btn-default bg-primary" type = "submit" value = "Submit" />
+          <input class ="btn btn-outline-success" type = "submit"  name = "Sign Up" />
       </form>
     </div>
-    
-  </body>
-</html>
+{% endblock %}

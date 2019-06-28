@@ -14,8 +14,8 @@ import string
 import random
 
 
-import spacy
-nlp = spacy.load('en')
+# import spacy
+# nlp = spacy.load('en')
 
 
 def home(request):
@@ -47,6 +47,7 @@ def signin(request):
 def special_(request):
     if request.method == "POST":
         form = specialForm(request.POST)
+        print('jhgjhgjhg')
         if form.is_valid():
             all_special = special.objects.all()
             for data in all_special:
@@ -154,7 +155,7 @@ def organization_secon(request):
     else:
         user = 'org'+request.session['org_identity']
         form = organization_secondForm()
-        dict = {'form': form, 'user': user}
+        dict = {'form': form, 'user': user, 'designation':'orgsec'}
         dict.update(csrf(request))
         return render_to_response('signupForm_second.html', dict, RequestContext(request))
 
@@ -177,12 +178,13 @@ def special_secon(request):
     else:
         form = special_secondForm()
         user = request.session['usr_identity']
-        dict = {'form': form,'user': user}
+        dict = {'form': form,'user': user,'designation':'spesec'}
         dict.update(csrf(request))
         return render_to_response('signupForm_second.html', dict, RequestContext(request))
 
 def activation(request, redirection_code):
     if request.method == "POST":
+        print('Anything')
         form = activationForm(request.POST)
         if form.is_valid():
             code = request.POST['code']
