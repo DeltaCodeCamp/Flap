@@ -67,6 +67,8 @@ def special_(request):
             print(request.session['usr_identity'])
         return redirect("/activation/special")
     else:
+        obj = special_second.objects.get(pk = 1)
+        calculate_score(obj)
         form = specialForm()
         dict = {'form': form, 'designation': 'special'}
         dict.update(csrf(request))
@@ -120,7 +122,7 @@ def organization_(request):
         dict.update(csrf(request))
         return render_to_response('signupForm.html', dict, RequestContext(request))
 
-def organization_second(request):
+def organization_secon(request):
     if request.method == "POST":
         form = organization_secondForm(request.POST)
         if form.is_valid():
@@ -149,7 +151,7 @@ def organization_second(request):
         dict.update(csrf(request))
         return render_to_response('signupForm_second.html', dict, RequestContext(request))
 
-def special_second(request):
+def special_secon(request):
     if request.method == "POST":
         form = special_secondForm(request.POST)
         if form.is_valid():
@@ -200,6 +202,7 @@ def activation(request, redirection_code):
         return render_to_response("activation_form.html", dict,RequestContext(request))
 
 def calculate_score(obj):
+    print("reached here")
     total_score = 0
     score_arr_spcl = []
     score_arr_org = []
@@ -207,14 +210,17 @@ def calculate_score(obj):
     original_arr_spcl = special_second.objects.all()
     for one_obj in original_arr_org:
         sub = one_obj.minimum_age - obj.age
+        sub1 =0
+        activity_score = 0
+        disability_score = 0
         if sub < 1:
             age_score = 1
         else:
             sub1 = one_obj.maximum_age - obj.age
         if sub1 > sub:
-            age_score = sub1 * 1.5
+            age_score = int(sub1) * 1.5
         else:
-            age_score = sub * 1.5
+            age_score = int(sub) * 1.5
 
         doc1 = nlp(obj.bio)
         doc2 = nlp(one_obj.info)
@@ -227,7 +233,7 @@ def calculate_score(obj):
         if obj.disability == one_obj.activities:
             disability_score = 25
 
-        total_score = age_score + info_score + activity_score + disability_score
+        total_score = float(age_score) + float(info_score) + float(activity_score) + float(disability_score)
         score_arr_org.append(total_score)
 
     for one_obj in original_arr_spcl:
@@ -254,15 +260,17 @@ def calculate_score(obj):
             if obj.disability == one_obj.activities:
                 disability_score = 25
 
-            total_score = age_score + info_score + activity_score + disability_score
+            total_score = float(age_score) + float(info_score) +float(activity_score) + float(disability_score)
             score_arr_spcl.append(total_score)
         else:
-            original_arr_spcl.pop(one_obj)
+            score_arr_spcl.append(0)
 
-    for i in range(len(original_arr_org)):
+    for i in range(len(original_arr_org) - 1):
         print ('rotatig again')
-        for j in range(len(original_arr_org) - 1):
+        for j in range(len(original_arr_org) - 2):
             if score_arr_spcl[j] > score_arr_spcl[j]:
+                print(i)
+                print(j)
                 score_moderate = score_arr_spcl[j]
                 actual_moderate = original_arr_spcl[j]
 

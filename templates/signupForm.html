@@ -14,11 +14,15 @@
                 {{form.phone}}
 
 
-
             {% elif designation == "organization" %}
                 <label class="label1">ORGANIZATION</label><br>
                 {{form.organization}}<br>
                 <label>PASSWORD</label><br>
+                {{form.password}}<br>
+                <label class ="label2">PHONE</label><br>
+                {{form.phone}}
+
+
 
             {% elif designation == "event" %}
                 <label>EVENT</label><br>
@@ -29,7 +33,7 @@
                 {{form.after_days}}<br>
                 <label>INFO</label><br>
                 {{form.info}}
-                
+
             {% else %}
                 {{form.organizations}}<br>
 
