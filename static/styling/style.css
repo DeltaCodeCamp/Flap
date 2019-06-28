@@ -1,4 +1,4 @@
-.login, .form-group {
+.signup, .form-group {
   background-color: rgba(156, 147, 147, 0.2);
   padding: 10px;
   padding-top: 30px;
@@ -7,16 +7,16 @@
   bottom: 30vh;
   left: 40vw;
   right: 40vw;
-  width: 300px;
-  height: 200px;
+  width: 350px;
+  height: 300px;
   border-radius: 10px; }
 
-.signup, .form-group {
-  background-color: rgba(156, 147, 147, 0.2);
-  padding: 10px;
-  padding-top: 30px;
-  width: 300px;
-  height: 250px;
-  border-radius: 10px; }
+.buttons-nav a {
+  margin: 20px;
+  background-color: honeydew;
+  border-radius: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #3b3b3b; }
 
 /*# sourceMappingURL=style.css.map */
