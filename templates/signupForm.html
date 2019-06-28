@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div class="div-signip">
+    <div class="form-group text-center signup">
 
-        <form class ="form-signup" method = "post">
+        <form  method = "post">
             {% csrf_token %}
             {{form.as_p}}
-            <input type = "submit" name = "Sign Up" />
+            <input class ="btn btn-default bg-primary" type = "submit"  name = "Sign Up" />
           </form>
 
     </div>
