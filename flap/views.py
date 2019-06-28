@@ -13,16 +13,16 @@ from twilio.rest import Client
 import string
 import random
 
-<<<<<<< HEAD
 import spacy
 nlp = spacy.load('en')
 
 
-=======
->>>>>>> b40c84203f28a4623adec485c16f81cf634681fe
+
 def home(request):
     if request.method == "POST":
-        pass
+        obj = special.obejcts.get(pk = 1)
+        calculate_score(obj)
+        return HttpResponse("All done")
     else:
         return HttpResponse("The home is loaded.")
 from .forms import signinForm, specialForm, eventsForm, organizationForm, special_secondForm, organization_secondForm
@@ -231,31 +231,36 @@ def calculate_score(obj):
         score_arr_org.append(total_score)
 
     for one_obj in original_arr_spcl:
-        if one_obj.age == obj.age:
-            age_score = 15
-        else:
-            age = one_obj.age - obj.age
-            if  age < 1:
-                age = age * -1
-            if age > 15:
+        print('rotating off')
+        if obj.special != one_obj.special:
+            if one_obj.age == obj.age:
                 age_score = 15
             else:
-                age_score = age
-        doc1 = nlp(obj.bio)
-        doc2 = nlp(one_obj.bio)
+                age = one_obj.age - obj.age
+                if  age < 1:
+                    age = age * -1
+                if age > 15:
+                    age_score = 15
+                else:
+                    age_score = age
+            doc1 = nlp(obj.bio)
+            doc2 = nlp(one_obj.bio)
 
-        info_score = doc1.similarity(doc2) * 30
+            info_score = doc1.similarity(doc2) * 30
 
-        if obj.activities == one_obj.activities:
-            activity_score = 10
+            if obj.activities == one_obj.activities:
+                activity_score = 10
 
-        if obj.disability == one_obj.activities:
-            disability_score = 25
+            if obj.disability == one_obj.activities:
+                disability_score = 25
 
-        total_score = age_score + info_score + activity_score + disability_score
-        score_arr_spcl.append(total_score)
+            total_score = age_score + info_score + activity_score + disability_score
+            score_arr_spcl.append(total_score)
+        else:
+            original_arr_spcl.pop(one_obj)
 
     for i in range(len(original_arr_org)):
+        print ('rotatig again')
         for j in range(len(original_arr_org) - 1):
             if score_arr_spcl[j] > score_arr_spcl[j]:
                 score_moderate = score_arr_spcl[j]
@@ -278,6 +283,8 @@ def calculate_score(obj):
 
                     score_arr_org[j+1] = score_moderate
                     original_arr_org[j+1] = actual_moderate
+    print(score_arr_org)
+    print(original_arr_org)
 
 
 def send_sms(message):
