@@ -6,6 +6,24 @@ from django.template import RequestContext
 
 from django.template.context_processors import csrf
 
+from .forms import signinForm, specialForm, eventsForm, organizationForm, special_secondForm, organization_secondForm, activationForm
+from .models import special, organization, events, special_second, organization_second, activation_tbl
+
+from twilio.rest import Client
+import string
+import random
+
+import spacy
+nlp = spacy.load('en')
+
+
+def home(request):
+    if request.method == "POST":
+        pass
+    else:
+        return HttpResponse("The home is loaded.")
+from .forms import signinForm, specialForm, eventsForm, organizationForm, special_secondForm, organization_secondForm
+
 
 def signin(request):
     if request.method == "POST":
@@ -47,7 +65,7 @@ def special_(request):
         return redirect("/activation/special")
     else:
         form = specialForm()
-        dict = {'form': form}
+        dict = {'form': form, 'designation': 'special'}
         dict.update(csrf(request))
         return render_to_response('signupForm.html', dict, RequestContext(request))
 
@@ -64,7 +82,7 @@ def events_(request):
         return HttpResponse("The event was added.")
     else:
         form = eventsForm()
-        dict = {'form': form}
+        dict = {'form': form, 'designation': 'events'}
         dict.update(csrf(request))
         return render_to_response('signupForm.html', dict, RequestContext(request))
 
@@ -95,7 +113,7 @@ def organization_(request):
         return redirect("/activation/organization")
     else:
         form = organizationForm()
-        dict = {'form': form}
+        dict = {'form': form, 'designation': 'organization'}
         dict.update(csrf(request))
         return render_to_response('signupForm.html', dict, RequestContext(request))
 
@@ -177,6 +195,86 @@ def activation(request, redirection_code):
         dict = {'form': form}
         dict.update(csrf(request))
         return render_to_response("activation_form.html", dict,RequestContext(request))
+
+def calculate_score(obj):
+    total_score = 0
+    score_arr_spcl = []
+    score_arr_org = []
+    original_arr_org = organization_second.objects.all()
+    original_arr_spcl = special_second.objects.all()
+    for one_obj in original_arr_org:
+        sub = one_obj.minimum_age - obj.age
+        if sub < 1:
+            age_score = 1
+        else:
+            sub1 = one_obj.maximum_age - obj.age
+        if sub1 > sub:
+            age_score = sub1 * 1.5
+        else:
+            age_score = sub * 1.5
+
+        doc1 = nlp(obj.bio)
+        doc2 = nlp(one_obj.info)
+
+        info_score = doc1.similarity(doc2) * 30
+
+        if obj.activities == one_obj.activities:
+            activity_score = 10
+
+        if obj.disability == one_obj.activities:
+            disability_score = 25
+
+        total_score = age_score + info_score + activity_score + disability_score
+        score_arr_org.append(total_score)
+
+    for one_obj in original_arr_spcl:
+        if one_obj.age == obj.age:
+            age_score = 15
+        else:
+            age = one_obj.age - obj.age
+            if  age < 1:
+                age = age * -1
+            if age > 15:
+                age_score = 15
+            else:
+                age_score = age
+        doc1 = nlp(obj.bio)
+        doc2 = nlp(one_obj.bio)
+
+        info_score = doc1.similarity(doc2) * 30
+
+        if obj.activities == one_obj.activities:
+            activity_score = 10
+
+        if obj.disability == one_obj.activities:
+            disability_score = 25
+
+        total_score = age_score + info_score + activity_score + disability_score
+        score_arr_spcl.append(total_score)
+
+    for i in range(len(original_arr_org)):
+        for j in range(len(original_arr_org) - 1):
+            if score_arr_spcl[j] > score_arr_spcl[j]:
+                score_moderate = score_arr_spcl[j]
+                actual_moderate = original_arr_spcl[j]
+
+                score_arr_spcl[j] = score_arr_spcl[j+1]
+                original_arr_spcl[j] = original_arr_spcl[j+1]
+
+                score_arr_spcl[j+1] = score_moderate
+                original_arr_spcl[j+1] = actual_moderate
+
+        for i in range(len(original_arr_org)):
+            for j in range(len(original_arr_org) - 1):
+                if score_arr_org[j] > score_arr_org[j]:
+                    score_moderate = score_arr_org[j]
+                    actual_moderate = original_arr_org[j]
+
+                    score_arr_org[j] = score_arr_org[j+1]
+                    original_arr_org[j] = original_arr_org[j+1]
+
+                    score_arr_org[j+1] = score_moderate
+                    original_arr_org[j+1] = actual_moderate
 
 
 def send_sms(message):
