@@ -6,6 +6,20 @@ from django.template import RequestContext
 
 from django.template.context_processors import csrf
 
+from .forms import signinForm, specialForm, eventsForm, organizationForm, special_secondForm, organization_secondForm, activationForm
+from .models import special, organization, events, special_second, organization_second, activation_tbl
+
+from twilio.rest import Client
+import string
+import random
+
+def home(request):
+    if request.method == "POST":
+        pass
+    else:
+        return HttpResponse("The home is loaded.")
+from .forms import signinForm, specialForm, eventsForm, organizationForm, special_secondForm, organization_secondForm
+
 
 def signin(request):
     if request.method == "POST":
