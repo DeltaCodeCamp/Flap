@@ -14,10 +14,11 @@
     border: 1px solid blue;
     margin-left: 30%;
     margin-right: 30%;
-    margin-top: 5%;
+    margin-top: 15%;
     background: linear-gradient(rgba(0, 0, 0, 0.836),rgb(102, 7, 73));
     border-radius: 20px;
-    box-shadow: 0px 10px 5px rgba(52, 0, 100, 0.918)
+    box-shadow: 0px 10px 5px rgba(52, 0, 100, 0.918);
+    margin-bottom: 100px;
 }
 
 .form-log input[type = "text"]{
@@ -64,10 +65,12 @@
     margin-top: 10%;
 }
 
-.label2{
-    
-}
+
 
 .custom-nav-styling{
-    background: linear-gradient(to right,black,purple);
+    background: linear-gradient(to right,purple,rgba(44, 6, 48, 0.1),purple);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    
 }
