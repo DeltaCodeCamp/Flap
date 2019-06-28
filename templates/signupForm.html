@@ -12,21 +12,13 @@
                 {{form.password}}<br>
                 <label class ="label2">PHONE</label><br>
                 {{form.phone}}
-<<<<<<< HEAD
+
 
 
             {% elif designation == "organization" %}
                 <label class="label1">ORGANIZATION</label><br>
                 {{form.organization}}<br>
                 <label>PASSWORD</label><br>
-=======
-            {% else %} 
-                {{form.organizations}}<br>
->>>>>>> 506be00d0b7df451963c4014f4a73933ab729513
-                {{form.password}}<br>
-                <label class ="label2">PHONE</label><br>
-                {{form.phone}} 
-
 
             {% elif designation == "event" %}
                 <label>EVENT</label><br>
@@ -37,9 +29,19 @@
                 {{form.after_days}}<br>
                 <label>INFO</label><br>
                 {{form.info}}
+                
+            {% else %}
+                {{form.organizations}}<br>
+
+                {{form.password}}<br>
+                <label class ="label2">PHONE</label><br>
+                {{form.phone}}
+
+
+
             {% endif %}
             <br>
-            <br>   
+            <br>
             <input class ="btn btn-outline-success" type = "submit"  name = "Sign Up" />
         </form>
     </div>

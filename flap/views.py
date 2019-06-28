@@ -14,6 +14,10 @@ import string
 import random
 
 
+import spacy
+nlp = spacy.load('en')
+
+
 def home(request):
     if request.method == "POST":
         obj = special.obejcts.get(pk = 1)
