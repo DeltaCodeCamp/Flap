@@ -4,8 +4,8 @@ from . import views
 
 urlpatterns = [
 path('signin', views.signin, name = "signin"),
-path('special_second', views.special_second, name = "special_second"),
-path('organization_second', views.organization_second, name = "organization_second"),
+path('special_second', views.special_secon, name = "special_second"),
+path('organization_second', views.organization_secon, name = "organization_second"),
 path('special', views.special_, name = "special"),
 path('organization', views.organization_, name = "organization"),
 path('events', views.events_, name = "events"),
