@@ -14,8 +14,8 @@ import string
 import random
 
 
-import spacy
-nlp = spacy.load('en')
+# import spacy
+# nlp = spacy.load('en')
 
 
 def home(request):
@@ -25,8 +25,8 @@ def home(request):
         return HttpResponse("All done")
     else:
         obj = special_second.objects.get(pk = 1)
-        all_arr = calculate_score(obj)
-        dict = {'organizations': all_arr[1][:4], 'special': all_arr[3][:4]}
+        # all_arr = calculate_score(obj)
+        dict = {}
         dict.update(csrf(request))
         return render_to_response('home.html', dict, RequestContext(request))
 from .forms import signinForm, specialForm, eventsForm, organizationForm, special_secondForm, organization_secondForm
@@ -210,117 +210,117 @@ def activation(request, redirection_code):
         dict.update(csrf(request))
         return render_to_response("activation_form.html", dict,RequestContext(request))
 
-def calculate_score(obj):
-    print("reached here")
-    total_score = 0
-    score_arr_spcl = []
-    score_arr_org = []
-    original_arr_org = []
-    original_arr_spcl = []
-    original_arr_or = organization_second.objects.all()
-    print(len(original_arr_or))
-    for a in original_arr_or:
-        print(a.organization.organization)
-        original_arr_org.append(a)
-    original_arr_spc = special_second.objects.all()
-    print(len(original_arr_spc))
-    for b in original_arr_spc:
-        print(b.special.username)
-        original_arr_spcl.append(b)
-        sub1 =0
-        activity_score = 0
-        disability_score = 0
-    for one_obj in original_arr_org:
-        sub = one_obj.minimum_age - obj.age
-        sub1 =0
-        activity_score = 0
-        disability_score = 0
-        if sub < 1:
-            age_score = 1
-        else:
-            sub1 = one_obj.maximum_age - obj.age
-        if sub1 > sub:
-            age_score = int(sub1) * 1.5
-        else:
-            age_score = int(sub) * 1.5
+# def calculate_score(obj):
+#     print("reached here")
+#     total_score = 0
+#     score_arr_spcl = []
+#     score_arr_org = []
+#     original_arr_org = []
+#     original_arr_spcl = []
+#     original_arr_or = organization_second.objects.all()
+#     print(len(original_arr_or))
+#     for a in original_arr_or:
+#         print(a.organization.organization)
+#         original_arr_org.append(a)
+#     original_arr_spc = special_second.objects.all()
+#     print(len(original_arr_spc))
+#     for b in original_arr_spc:
+#         print(b.special.username)
+#         original_arr_spcl.append(b)
+#         sub1 =0
+#         activity_score = 0
+#         disability_score = 0
+#     for one_obj in original_arr_org:
+#         sub = one_obj.minimum_age - obj.age
+#         sub1 =0
+#         activity_score = 0
+#         disability_score = 0
+#         if sub < 1:
+#             age_score = 1
+#         else:
+#             sub1 = one_obj.maximum_age - obj.age
+#         if sub1 > sub:
+#             age_score = int(sub1) * 1.5
+#         else:
+#             age_score = int(sub) * 1.5
 
-        doc1 = nlp(obj.bio)
-        doc2 = nlp(one_obj.info)
+#         doc1 = nlp(obj.bio)
+#         doc2 = nlp(one_obj.info)
 
-        info_score = doc1.similarity(doc2) * 30
+#         info_score = doc1.similarity(doc2) * 30
 
-        if obj.activities == one_obj.activities:
-            activity_score = 10
+#         if obj.activities == one_obj.activities:
+#             activity_score = 10
 
-        if obj.disability == one_obj.activities:
-            disability_score = 25
+#         if obj.disability == one_obj.activities:
+#             disability_score = 25
 
-        total_score = float(age_score) + float(info_score) + float(activity_score) + float(disability_score)
-        score_arr_org.append(total_score)
+#         total_score = float(age_score) + float(info_score) + float(activity_score) + float(disability_score)
+#         score_arr_org.append(total_score)
 
-    for one_obj in original_arr_spcl:
-        if obj.special != one_obj.special:
-            if one_obj.age == obj.age:
-                age_score = 15
-            else:
-                age = one_obj.age - obj.age
-                if  age < 1:
-                    age = age * -1
-                if age > 15:
-                    age_score = 15
-                else:
-                    age_score = age
-            doc1 = nlp(obj.bio)
-            doc2 = nlp(one_obj.bio)
+#     for one_obj in original_arr_spcl:
+#         if obj.special != one_obj.special:
+#             if one_obj.age == obj.age:
+#                 age_score = 15
+#             else:
+#                 age = one_obj.age - obj.age
+#                 if  age < 1:
+#                     age = age * -1
+#                 if age > 15:
+#                     age_score = 15
+#                 else:
+#                     age_score = age
+#             doc1 = nlp(obj.bio)
+#             doc2 = nlp(one_obj.bio)
 
-            info_score = doc1.similarity(doc2) * 30
+#             info_score = doc1.similarity(doc2) * 30
 
-            if obj.activities == one_obj.activities:
-                activity_score = 10
+#             if obj.activities == one_obj.activities:
+#                 activity_score = 10
 
-            if obj.disability == one_obj.activities:
-                disability_score = 25
+#             if obj.disability == one_obj.activities:
+#                 disability_score = 25
 
-            total_score = float(age_score) + float(info_score) +float(activity_score) + float(disability_score)
-            score_arr_spcl.append(total_score)
-        else:
-            score_arr_spcl.append(0)
+#             total_score = float(age_score) + float(info_score) +float(activity_score) + float(disability_score)
+#             score_arr_spcl.append(total_score)
+#         else:
+#             score_arr_spcl.append(0)
 
-    for i in range(len(original_arr_spcl)):
-        for j in range(len(original_arr_spcl) - 1):
-            if score_arr_spcl[j] < score_arr_spcl[j+1]:
-                print(i)
-                print(j)
-                score_moderate = score_arr_spcl[j]
-                actual_moderate = original_arr_spcl[j]
+#     for i in range(len(original_arr_spcl)):
+#         for j in range(len(original_arr_spcl) - 1):
+#             if score_arr_spcl[j] < score_arr_spcl[j+1]:
+#                 print(i)
+#                 print(j)
+#                 score_moderate = score_arr_spcl[j]
+#                 actual_moderate = original_arr_spcl[j]
 
-                score_arr_spcl[j] = score_arr_spcl[j+1]
-                original_arr_spcl[j] = original_arr_spcl[j+1]
+#                 score_arr_spcl[j] = score_arr_spcl[j+1]
+#                 original_arr_spcl[j] = original_arr_spcl[j+1]
 
-                score_arr_spcl[j+1] = score_moderate
-                original_arr_spcl[j+1] = actual_moderate
+#                 score_arr_spcl[j+1] = score_moderate
+#                 original_arr_spcl[j+1] = actual_moderate
 
 
 
-        for i in range(len(original_arr_org)):
-            for j in range(len(original_arr_org) - 1):
-                if score_arr_org[j] < score_arr_org[j+1]:
-                    score_moderate = score_arr_org[j]
-                    actual_moderate = original_arr_org[j]
+#         for i in range(len(original_arr_org)):
+#             for j in range(len(original_arr_org) - 1):
+#                 if score_arr_org[j] < score_arr_org[j+1]:
+#                     score_moderate = score_arr_org[j]
+#                     actual_moderate = original_arr_org[j]
 
-                    score_arr_org[j] = score_arr_org[j+1]
-                    original_arr_org[j] = original_arr_org[j+1]
+#                     score_arr_org[j] = score_arr_org[j+1]
+#                     original_arr_org[j] = original_arr_org[j+1]
 
-                    score_arr_org[j+1] = score_moderate
-                    original_arr_org[j+1] = actual_moderate
-    print(score_arr_org)
-    print(score_arr_spcl)
-    all_arr = []
-    all_arr.append(score_arr_org)
-    all_arr.append(original_arr_org)
-    all_arr.append(score_arr_spcl)
-    all_arr.append(original_arr_spcl)
-    return all_arr
+#                     score_arr_org[j+1] = score_moderate
+#                     original_arr_org[j+1] = actual_moderate
+#     print(score_arr_org)
+#     print(score_arr_spcl)
+#     all_arr = []
+#     all_arr.append(score_arr_org)
+#     all_arr.append(original_arr_org)
+#     all_arr.append(score_arr_spcl)
+#     all_arr.append(original_arr_spcl)
+#     return all_arr
 
 
 def send_sms(message):

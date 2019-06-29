@@ -1,12 +1,136 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Home</title>
-  </head>
-  <body>
-    {% for organization in organizations %}
-      {{organization.organization.organization}}
-    {% endfor %}
-  </body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+<div class="spe-all">
+
+<div class="card-group spe-cont">
+    <div class="card border border-dark  all-card">
+      <img class="card-img-top spe-cards" src="{% static 'image/profile.jpg' %}" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card border border-dark all-card" >
+        <img class="card-img-top spe-cards" src="{% static 'image/profile.jpg' %}" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card border border-dark all-card">
+        <img class="card-img-top spe-cards" src="{% static 'image/profile.jpg' %}" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card border border-dark all-card">
+        <img class="card-img-top spe-cards" src="{% static 'image/profile.jpg' %}" alt="Card image cap" >
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="border border-dark main-blog">
+  <div class="card-body">
+    <h5 class="card-title">Blog Title</h5>
+    <p class="card-text"></p>
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+  </div>
+</div>
+
+<div class="border border-dark main-blog1">
+    <div class="card-body">
+      <h5 class="card-title">Blog Title</h5>
+      <p class="card-text"></p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+</div>
+
+
+
+
+<div class="card-group">
+    <div class="card border border-dark  all-card">
+        <img class="card-img-top spe-cards" src="{% static 'image/building3.jpg' %}" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card border border-dark all-card">
+        <img class="card-img-top spe-cards" src="{% static 'image/building2.png' %}" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card border border-dark  all-card">
+        <img class="card-img-top spe-cards" src="{% static 'image/building1.jpg' %}" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card border border-dark all-card">
+        <img class="card-img-top spe-cards" src="{% static 'image/building.png' %}" alt="Card image cap" >
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card-group">
+    <div class="card border border-dark  events">
+        <img class="card-img-top events-img" src="{% static 'image/events.png' %}" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Events</h5>
+        <p class="card-text"></p>
+        <p class="card-text"><small class="text-muted"></small></p>
+      </div>
+    </div>
+    <div class="card border border-dark events">
+        <img class="card-img-top events-img" src="{% static 'image/events.png' %}" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Events</h5>
+        <p class="card-text"></p>
+        <p class="card-text"><small class="text-muted"></small></p>
+      </div>
+    </div>
+    <div class="card border border-dark  events">
+        <img class="card-img-top events-img" src="{% static 'image/events.png' %}" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Events</h5>
+        <p class="card-text"></p>
+        <p class="card-text"><small class="text-muted"></small></p>
+      </div>
+    </div>
+    <div class="card border border-dark events">
+        <img class="card-img-top events-img" src="{% static 'image/events.png' %}" alt="Card image cap" >
+        <div class="card-body">
+          <h5 class="card-title">Events</h5>
+          <p class="card-text"></p>
+          <p class="card-text"><small class="text-muted"></small></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
